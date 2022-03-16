@@ -22,20 +22,17 @@ class Bird(pygame.sprite.Sprite):
         self.rect = self.image.get_rect() 
         self.rect.center = [x,y]
 
-        # il faut que la valeur du rotate aille de 0 à 45 degré lorsque l'on saute et qu'à chaque instant elle perde 5 degré jusqu"à atteindre -45
     def update(self):
-        # if(self.angle >= -90):
-        #     self.angle -= 1
-        # elif(self.clicked == True):
-        #     self.angle += 3
         self.velocity += 0.5
         self.image = pygame.transform.rotate(self.allimages[self.index], self.velocity * -2)
         if(self.velocity >= 8):
             self.velocity = 8
-        if(self.rect.bottom < 600):
+        if(self.rect.bottom < 700):
             self.rect.y += self.velocity
         self.counter += 1 
         events = pygame.event.get()
+        
+        #index to change bird frame
         if(self.counter > self.couldown):
             self.counter = 0
             self.index += 1
