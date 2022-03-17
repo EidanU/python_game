@@ -39,8 +39,6 @@ class FlappyBird():
             text_render = self.font.render(text, 1, (255, 255, 255))
             text_width, text_height = self.font.size(text)
             x, y = position
-            print(x)
-            print(y)
             pygame.draw.rect(screen, (0, 0, 0), (x/2-text_width, y/2-text_height, text_width*2 , text_height*2))
             return screen.blit(text_render, ((x-text_width)/2, (y-text_height)/2))
     
@@ -106,8 +104,8 @@ while flappyBird.game:
 
     # Game Over       
     if flappyBird.gameOver == True:
-        screen.blit(flappyBird.text,(w/2, h/2))
-        b1 = flappyBird.button(screen, (w, h), "Re Start")
+        # screen.blit(flappyBird.text,(w/2, h/3))
+        b1 = flappyBird.button(screen, (w, h), "Restart")
         
     pygame.display.update()
     pygame.display.flip()

@@ -29,6 +29,9 @@ class Bird(pygame.sprite.Sprite):
             self.velocity = 8
         if(self.rect.bottom < 700):
             self.rect.y += self.velocity
+            if(self.rect.y < 0):
+                self.rect.y = 0
+
         self.counter += 1 
         events = pygame.event.get()
         
@@ -44,6 +47,4 @@ class Bird(pygame.sprite.Sprite):
         self.clicked = True
         self.velocity = -10
 
-    # def __del__(self):
-    #     print("delete")
-
+#

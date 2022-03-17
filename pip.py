@@ -22,8 +22,6 @@ class Pip(pygame.sprite.Sprite):
         if self.rect.right < 0:
             self.kill()
 
-    # def __del__(self):
-    #     print("delete")
      
  
 
