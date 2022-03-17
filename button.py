@@ -1,13 +1,10 @@
 import pygame
 
-screen = pygame.display.set_mode((1024, 768)) 
 clock = pygame.time.Clock()
 
-
 class Button:
-    """Create a button, then blit the surface in the while loop"""
-
     def __init__(self, text, pos, bg="black", feedback=""):
+        self.start = True
         self.x, self.y = pos
         self.font = pygame.font.SysFont("Arial", 30)
         if feedback == "":
@@ -29,5 +26,7 @@ class Button:
         x, y = pygame.mouse.get_pos()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if pygame.mouse.get_pressed()[0]:
-                if self.rect.collidepoint(x, y):
-                    self.change_text(self.feedback, bg="red")
+                print('ok')
+                # if self.rect.collidepoint(x, y):
+          
+         
