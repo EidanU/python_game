@@ -9,7 +9,7 @@ class Pip(pygame.sprite.Sprite):
         self.image = pygame.image.load("assets/pip.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = [x, y]
-        self.pipGap = random.randrange(60, 120)
+        self.pipGap = random.randrange(65, 120)
         self.scrollSpeed = scrollSpeed
         if position == 1:
             self.rect.topleft = [x, y + int(self.pipGap)]

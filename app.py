@@ -12,7 +12,7 @@ fps = 60
 screen = pygame.display.set_mode((1024, 768)) 
 pygame.display.set_caption('Flappy Bird')
 w, h = pygame.display.get_surface().get_size()
-pipeFrequency = 1500
+pipeFrequency = 2000
 
 class FlappyBird():
         def __init__(self):
