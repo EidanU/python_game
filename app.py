@@ -83,7 +83,7 @@ while flappyBird.game:
         flappyBird.bird_group.draw(screen)
         flappyBird.bird_group.update()
 
-        # Infinite pipes
+        # Generate Infinite pipes
         timeNow = pygame.time.get_ticks()
         if(timeNow - flappyBird.last_pipe > pipeFrequency):
             bottom_pip = Pip(w, int(h / 2), 1, flappyBird.scrollSpeed)
