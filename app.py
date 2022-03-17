@@ -1,7 +1,4 @@
-import random 
-import sys 
 import pygame 
-import threading
 from pygame.locals import * 
 from bird import *
 from pip import *
@@ -37,33 +34,28 @@ class FlappyBird():
             self.font = pygame.font.SysFont(None, 60)
             self.text = self.font.render('GAME OVER', True, RED)
 
-            #Create Start and restart button
+            # Create Start and restart button
         def button(self,screen, position, text):
-            text_render = self.font.render(text, 1, (0, 0, 0))
-            x, y, w , h = text_render.get_rect()
+            text_render = self.font.render(text, 1, (255, 255, 255))
+            text_width, text_height = self.font.size(text)
             x, y = position
-            # pygame.draw.line(screen, (150, 150, 150), (x, y), (x + w , y), 5)
-            # pygame.draw.line(screen, (150, 150, 150), (x, y - 2), (x, y + h), 5)
-            # pygame.draw.line(screen, (50, 50, 50), (x, y + h), (x + w , y + h), 5)
-            # pygame.draw.line(screen, (50, 50, 50), (x + w , y+h), [x + w , y], 5)
-            pygame.draw.rect(screen, (100, 100, 100), (x, y, w , h))
-            return screen.blit(text_render, (x, y))
+            print(x)
+            print(y)
+            pygame.draw.rect(screen, (0, 0, 0), (x/2-text_width, y/2-text_height, text_width*2 , text_height*2))
+            return screen.blit(text_render, ((x-text_width)/2, (y-text_height)/2))
     
         def start(self):
-            # instanciate Bird
+            # instanciate Bird class
             self.bird_group = pygame.sprite.Group()
             self.bird = Bird(100, 300)
             self.bird_group.add(self.bird)
 
-            # instanciate Pip 
             self.pip_group = pygame.sprite.Group()
-
             self.playing = True
 
-        # def gameOver(self):
-
-
+# instanciate FlappyBird class
 flappyBird=FlappyBird()
+
 # Event loop
 while flappyBird.game:
     clock.tick(fps)
@@ -72,7 +64,7 @@ while flappyBird.game:
 
     # If game menu 
     if flappyBird.playing == False and flappyBird.gameOver == False:
-        b1 = flappyBird.button(screen, (500, 300), "Start")
+        b1 = flappyBird.button(screen, (w, h), "Start")
 
     # Click events
     for event in pygame.event.get():
@@ -80,12 +72,12 @@ while flappyBird.game:
             flappyBird.game = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                flappyBird.bird.jump()
+                if flappyBird.playing == True:
+                    flappyBird.bird.jump()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if b1.collidepoint(pygame.mouse.get_pos()):
                flappyBird.start()
          
-
     if flappyBird.playing == True:
         flappyBird.gameOver = False
 
@@ -103,7 +95,7 @@ while flappyBird.game:
         flappyBird.pip_group.draw(screen)
         flappyBird.pip_group.update()
 
-        # Collisions
+        # Handle Collisions
         if pygame.sprite.groupcollide(flappyBird.bird_group, flappyBird.pip_group, False, False) or flappyBird.bird.rect.top > 650:
             flappyBird.playing = False
             flappyBird.gameOver = True
@@ -115,7 +107,7 @@ while flappyBird.game:
     # Game Over       
     if flappyBird.gameOver == True:
         screen.blit(flappyBird.text,(w/2, h/2))
-        b1 = flappyBird.button(screen, (500, 300), "Re Start")
+        b1 = flappyBird.button(screen, (w, h), "Re Start")
         
     pygame.display.update()
     pygame.display.flip()
