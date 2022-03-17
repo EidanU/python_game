@@ -44,3 +44,6 @@ class Bird(pygame.sprite.Sprite):
         self.clicked = True
         self.velocity = -10
 
+    # def __del__(self):
+    #     print("delete")
+

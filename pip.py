@@ -21,6 +21,9 @@ class Pip(pygame.sprite.Sprite):
         self.rect.x -= self.scrollSpeed
         if self.rect.right < 0:
             self.kill()
+
+    # def __del__(self):
+    #     print("delete")
      
  
 
