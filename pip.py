@@ -2,14 +2,14 @@ import pygame
 import random
 from pygame.locals import * 
 
-# bird class
+# Pip class
 class Pip(pygame.sprite.Sprite):
     def __init__(self, x, y, position, scrollSpeed):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("assets/pip.png")
         self.rect = self.image.get_rect()
         self.rect.topleft = [x, y]
-        self.pipGap = random.randrange(70, 120)
+        self.pipGap = random.randrange(60, 120)
         self.scrollSpeed = scrollSpeed
         if position == 1:
             self.rect.topleft = [x, y + int(self.pipGap)]

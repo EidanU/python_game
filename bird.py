@@ -1,7 +1,7 @@
 import pygame 
 from pygame.locals import * 
 
-# bird class
+# Bird class
 class Bird(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -33,7 +33,6 @@ class Bird(pygame.sprite.Sprite):
                 self.rect.y = 0
 
         self.counter += 1 
-        events = pygame.event.get()
         
         #index to change bird frame
         if(self.counter > self.couldown):
@@ -41,7 +40,6 @@ class Bird(pygame.sprite.Sprite):
             self.index += 1
             if(self.index >= 3):
                 self.index = 0
-        # self.clicked = False
 
     def jump(self):
         self.clicked = True

@@ -14,6 +14,7 @@ pygame.display.set_caption('Flappy Bird')
 w, h = pygame.display.get_surface().get_size()
 pipeFrequency = 2000
 
+# FlappyBird class to handle start start and stop 
 class FlappyBird():
         def __init__(self):
 
@@ -21,9 +22,9 @@ class FlappyBird():
             self.playing = False
             self.gameOver = False
             self.game = True
-            self.ground_scroll = 0
+            self.groundScroll = 0
             self.scrollSpeed = 2
-            self.last_pipe = pygame.time.get_ticks()
+            self.lastPipe = pygame.time.get_ticks()
 
             # Fill background
             self.bgImage = pygame.image.load("assets/background.webp")
@@ -36,31 +37,29 @@ class FlappyBird():
 
             # Create Start and restart button
         def button(self,screen, position, text):
-            text_render = self.font.render(text, 1, (255, 255, 255))
-            text_width, text_height = self.font.size(text)
+            textRender = self.font.render(text, 1, (255, 255, 255))
+            textWidth, textHeight = self.font.size(text)
             x, y = position
-            pygame.draw.rect(screen, (0, 0, 0), (x/2-text_width, y/2-text_height, text_width*2 , text_height*2))
-            return screen.blit(text_render, ((x-text_width)/2, (y-text_height)/2))
+            pygame.draw.rect(screen, (0, 0, 0), (x/2-textWidth, y/2-textHeight, textWidth*2 , textHeight*2))
+            return screen.blit(textRender, ((x-textWidth)/2, (y-textHeight)/2))
     
         def start(self):
-            # instanciate Bird class
-            self.bird_group = pygame.sprite.Group()
+            # instanciate Bird and Pip classes
+            self.birdGroup = pygame.sprite.Group()
             self.bird = Bird(100, 300)
-            self.bird_group.add(self.bird)
-
-            self.pip_group = pygame.sprite.Group()
+            self.birdGroup.add(self.bird)
+            self.pipGroup = pygame.sprite.Group()
             self.playing = True
 
-# instanciate FlappyBird class
 flappyBird=FlappyBird()
 
-# Event loop
+# Game loop
 while flappyBird.game:
     clock.tick(fps)
     screen.blit(flappyBird.bgImage, (0, 0))
-    screen.blit(flappyBird.groundImage, (flappyBird.ground_scroll, 0))
+    screen.blit(flappyBird.groundImage, (flappyBird.groundScroll, 0))
 
-    # If game menu 
+    # Menu before clicking on start 
     if flappyBird.playing == False and flappyBird.gameOver == False:
         b1 = flappyBird.button(screen, (w, h), "Start")
 
@@ -80,31 +79,30 @@ while flappyBird.game:
         flappyBird.gameOver = False
 
         # Draw bird
-        flappyBird.bird_group.draw(screen)
-        flappyBird.bird_group.update()
+        flappyBird.birdGroup.draw(screen)
+        flappyBird.birdGroup.update()
 
         # Generate Infinite pipes
         timeNow = pygame.time.get_ticks()
-        if(timeNow - flappyBird.last_pipe > pipeFrequency):
+        if(timeNow - flappyBird.lastPipe > pipeFrequency):
             bottom_pip = Pip(w, int(h / 2), 1, flappyBird.scrollSpeed)
             top_pip = Pip(w, int(h / 2), -1, flappyBird.scrollSpeed)
-            flappyBird.pip_group.add(bottom_pip, top_pip)
-            flappyBird.last_pipe = timeNow
-        flappyBird.pip_group.draw(screen)
-        flappyBird.pip_group.update()
+            flappyBird.pipGroup.add(bottom_pip, top_pip)
+            flappyBird.lastPipe = timeNow
+        flappyBird.pipGroup.draw(screen)
+        flappyBird.pipGroup.update()
 
         # Handle Collisions
-        if pygame.sprite.groupcollide(flappyBird.bird_group, flappyBird.pip_group, False, False) or flappyBird.bird.rect.top > 650:
+        if pygame.sprite.groupcollide(flappyBird.birdGroup, flappyBird.pipGroup, False, False) or flappyBird.bird.rect.top > 650:
             flappyBird.playing = False
             flappyBird.gameOver = True
 
-        flappyBird.ground_scroll -= flappyBird.scrollSpeed
-        if abs(flappyBird.ground_scroll) > 35:
-            flappyBird.ground_scroll = 0
+        flappyBird.groundScroll -= flappyBird.scrollSpeed
+        if abs(flappyBird.groundScroll) > 35:
+            flappyBird.groundScroll = 0
 
     # Game Over       
     if flappyBird.gameOver == True:
-        # screen.blit(flappyBird.text,(w/2, h/3))
         b1 = flappyBird.button(screen, (w, h), "Restart")
         
     pygame.display.update()
