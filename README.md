@@ -8,4 +8,5 @@ Grandemement 'inspiré' du jeux flappy bird sur mobile, vous pourrez retrouver v
 
 - Entrer dans le dossier "game"
 - Lancer la commande "python3 app.py"
-- Jump en appuyant sur la touche "espace"
+- Jumpez en appuyant sur la touche "espace"
+
