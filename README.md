@@ -1,8 +1,8 @@
 # Flappy bird
 
-## Comment que c'est quoi que ce jeu
+## Comment que c'est quoi que ce jeu ? 
 
-Grandemement inspiré du jeux flappy bird de base, vous pourrez retrouver votre oiseau préféré et parcours un monde infinie composé de nombreux tuyaux à eviter. Bonne chance :)
+Grandemement 'inspiré' du jeux flappy bird sur mobile, vous pourrez retrouver votre oiseau préféré et parcourir un monde infini composé de nombreux tuyaux à éviter. Amusez vous bien et bonne chance :)
 
 ## Commandes :
 
